@@ -53,4 +53,23 @@ export class AppController {
       },
     );
   }
+  @Get('auth/google/login')
+  async googleLogin() {
+    return this.authService.send(
+      {
+        cmd: 'google-login',
+      },
+      {},
+    );
+  }
+
+  @Get('auth/google/redirect')
+  async googleRedirect() {
+    return this.authService.send(
+      {
+        cmd: 'google-redirect',
+      },
+      {},
+    );
+  }
 }

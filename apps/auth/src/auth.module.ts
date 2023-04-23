@@ -15,6 +15,7 @@ import { JwtGuard } from './jwt.guard';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt-strategy';
+import { GoogleStrategy } from './utils/GoogleStrategy';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { JwtStrategy } from './jwt-strategy';
   providers: [
     JwtGuard,
     JwtStrategy,
+    GoogleStrategy,
     {
       provide: 'AuthServiceInterface',
       useClass: AuthService,

@@ -12,6 +12,7 @@ import { AuthService } from './auth.service';
 import { NewUserDTO } from './dtos/new-user.dto';
 import { ExistingUserDTO } from './dtos/existing-user.dto';
 import { JwtGuard } from './jwt.guard';
+import { GoogleAuthGuard } from '../../../libs/shared/src/guards/Google.guard';
 
 @Controller()
 export class AuthController {
@@ -75,5 +76,17 @@ export class AuthController {
     this.sharedService.acknowledgeMessage(context);
 
     return this.authService.getUserFromHeader(payload.jwt);
+  }
+
+  @MessagePattern({ cmd: 'google-login' })
+  @UseGuards(GoogleAuthGuard)
+  async googleLogin() {
+    return { msg: 'login ok' };
+  }
+
+  @MessagePattern({ cmd: 'google-redirect' })
+  @UseGuards(GoogleAuthGuard)
+  async googleRedirect() {
+    return { msg: 'redirect ok' };
   }
 }
